@@ -5,7 +5,12 @@ export default class TodoApp extends Component{
     constructor(props){
         super(props);
         this.state={
-            items:["Item #1","Item #2","Item #3","Item #4"]
+            items:[
+                {text:"Item #1",done:false,key:new Date().getMilliseconds() + " " + "Item #1"},
+                {text:"Item #2",done:false,key:new Date().getMilliseconds() + " " + "Item #2"},
+                {text:"Item #3",done:false,key:new Date().getMilliseconds() + " " + "Item #3"},
+                {text:"Item #4",done:false,key:new Date().getMilliseconds() + " " + "Item #4"}
+            ]
         };
     }
     render(){
@@ -16,7 +21,7 @@ export default class TodoApp extends Component{
                 <div className="col-md-6">
                     List Undone
                     <ul>
-                        {this.state.items.map(item => <li>{item}</li>)}
+                        {this.state.items.map(item => <li>{item.text}</li>)}
                     </ul>
                 </div>
                 <div className="col-md-6">
