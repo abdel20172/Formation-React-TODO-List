@@ -55,6 +55,15 @@ export default class TodoApp extends Component{
         
         return undone.length;
     };
+
+    delet= (key) => {
+
+        let filtred = this.state.items.filter(item => {
+            return item.key != key;
+        });
+        this.setState({items : filtred});
+
+    };
     render(){
         return(
         <div className="container">
@@ -62,7 +71,7 @@ export default class TodoApp extends Component{
             <div className="row">
                 <div className="col-md-6">
                     <div className="todolist ">
-                    List Undone
+                   
                     <form onSubmit={(e) => {
                         e.preventDefault();
                         this.add()}} >
@@ -70,10 +79,13 @@ export default class TodoApp extends Component{
                         className="form-control form-control-lg"
                         value={this.state.input} onChange={(e) => this.handleChange(e)}/>
                     </form>
+                    <br/>
                     <ul className="no-padding" id="not-done">
                         {this.state.items.map(item => {
                             if (!item.done) {
-                                return <li className="list-unstyled" key={item.key} onClick={() => this.move(item.key)}>{item.text}</li>
+                                return( <li className="list-unstyled" key={item.key} >
+                                    <label onClick={() => this.move(item.key)}>{item.text}</label>
+                                    </li>);
                             }
                         })}
                     </ul>
@@ -84,12 +96,13 @@ export default class TodoApp extends Component{
                 </div>
                 <div className="col-md-6">
                 <div className="todolist">
-                    List Done
+                    
                     <ul id="done-items">
                         {this.state.items.map(item => {
                             if (item.done) {
                                 return <li className="list-unstyled" key={item.key} >
-                                    <label onClick={() => this.move(item.key)}>{item.text}</label> <button className="btn float-right paddingzero"> <i class="fas fa-trash"></i></button>
+                                    <label onClick={() => this.move(item.key)}>{item.text}</label>
+                                    <button className="btn float-right paddingzero" onClick={e => this.delet(item.key)}> <i class="fas fa-trash"></i></button>
                                    
                                 </li>
                             }

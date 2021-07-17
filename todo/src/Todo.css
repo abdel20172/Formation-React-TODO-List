@@ -57,3 +57,7 @@ li.ui-state-default:last-child {
 .paddingZero {
     padding: 0;
 }
+
+#not-done li{
+    margin: 10px 0;
+}
