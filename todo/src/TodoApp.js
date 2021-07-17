@@ -10,7 +10,8 @@ export default class TodoApp extends Component{
                 {text:"Item #2",done:false,key:new Date().getMilliseconds() + " " + "Item #2"},
                 {text:"Item #3",done:false,key:new Date().getMilliseconds() + " " + "Item #3"},
                 {text:"Item #4",done:false,key:new Date().getMilliseconds() + " " + "Item #4"}
-            ]
+            ],
+            input:""
         };
     }
     // les evenements
@@ -24,6 +25,15 @@ export default class TodoApp extends Component{
         });
         this.setState({items : filtred});
     };
+
+    add = () => {
+        console.log(this.state.input);
+    };
+
+    handleChange = (e) => {
+        // console.log(e.target.value);
+        this.setState({input: e.target.value});
+    };
     render(){
         return(
         <div className="container">
@@ -31,6 +41,11 @@ export default class TodoApp extends Component{
             <div className="row">
                 <div className="col-md-6">
                     List Undone
+                    <form onSubmit={(e) => {
+                        e.preventDefault();
+                        this.add()}} >
+                        <input placeholder="add todo" value={this.state.input} onChange={(e) => this.handleChange(e)}/>
+                    </form>
                     <ul>
                         {this.state.items.map(item => {
                             if (!item.done) {
