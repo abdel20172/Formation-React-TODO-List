@@ -13,6 +13,17 @@ export default class TodoApp extends Component{
             ]
         };
     }
+    // les evenements
+    move = (key) => {
+        let filtred = this.state.items.map(item => {
+            if(item.key == key){
+                item.done = !item.done;
+            }
+            return item;
+            
+        });
+        this.setState({items : filtred});
+    };
     render(){
         return(
         <div className="container">
@@ -21,7 +32,7 @@ export default class TodoApp extends Component{
                 <div className="col-md-6">
                     List Undone
                     <ul>
-                        {this.state.items.map(item => <li>{item.text}</li>)}
+                        {this.state.items.map(item => <li key={item.key} onClick={() => this.move(item.key)}>{item.text}</li>)}
                     </ul>
                 </div>
                 <div className="col-md-6">
