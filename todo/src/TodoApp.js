@@ -66,6 +66,10 @@ export default class TodoApp extends Component{
     };
     render(){
         return(
+            <div>
+            <nav class="navbar navbar-light bg-light">
+            <span class="navbar-brand mb-0 h1">Todo App</span>
+            </nav>
         <div className="container">
             <br/>
             <div className="row">
@@ -111,6 +115,7 @@ export default class TodoApp extends Component{
                     </div>
                 </div>
             </div>
+        </div>
         </div>);
     }
 }
