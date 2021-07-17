@@ -32,12 +32,23 @@ export default class TodoApp extends Component{
                 <div className="col-md-6">
                     List Undone
                     <ul>
-                        {this.state.items.map(item => <li key={item.key} onClick={() => this.move(item.key)}>{item.text}</li>)}
+                        {this.state.items.map(item => {
+                            if (!item.done) {
+                                return <li key={item.key} onClick={() => this.move(item.key)}>{item.text}</li>
+                            }
+                        })}
                     </ul>
                 </div>
                 <div className="col-md-6">
                     List Done
-                   
+                    <ul>
+                        {this.state.items.map(item => {
+                            if (item.done) {
+                                return <li key={item.key} onClick={() => this.move(item.key)}>{item.text}</li>
+                            }
+                        })}
+                    </ul>
+                        
                 </div>
             </div>
         </div>);
