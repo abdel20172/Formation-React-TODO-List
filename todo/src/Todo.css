@@ -37,8 +37,10 @@ li.ui-state-default:last-child {
 
 #done-items label {
     padding: 10px 0;
-    color:  lightgray;
-    text-decoration: line-through;
+    /* color:  lightgray;
+    text-decoration: line-through; */
+    color:  black;
+    text-decoration: dashed;
 }
 
 #done-items li:last-child {

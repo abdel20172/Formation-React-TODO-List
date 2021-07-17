@@ -61,7 +61,7 @@ export default class TodoApp extends Component{
             <br/>
             <div className="row">
                 <div className="col-md-6">
-                    <div className="todolist">
+                    <div className="todolist ">
                     List Undone
                     <form onSubmit={(e) => {
                         e.preventDefault();
@@ -70,10 +70,10 @@ export default class TodoApp extends Component{
                         className="form-control form-control-lg"
                         value={this.state.input} onChange={(e) => this.handleChange(e)}/>
                     </form>
-                    <ul>
+                    <ul className="no-padding" id="not-done">
                         {this.state.items.map(item => {
                             if (!item.done) {
-                                return <li key={item.key} onClick={() => this.move(item.key)}>{item.text}</li>
+                                return <li className="list-unstyled" key={item.key} onClick={() => this.move(item.key)}>{item.text}</li>
                             }
                         })}
                     </ul>
@@ -85,10 +85,13 @@ export default class TodoApp extends Component{
                 <div className="col-md-6">
                 <div className="todolist">
                     List Done
-                    <ul>
+                    <ul id="done-items">
                         {this.state.items.map(item => {
                             if (item.done) {
-                                return <li key={item.key} onClick={() => this.move(item.key)}>{item.text}</li>
+                                return <li className="list-unstyled" key={item.key} >
+                                    <label onClick={() => this.move(item.key)}>{item.text}</label> <button className="btn float-right paddingzero"> <i class="fas fa-trash"></i></button>
+                                   
+                                </li>
                             }
                         })}
                     </ul>
