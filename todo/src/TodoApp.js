@@ -1,5 +1,6 @@
 
 import React,{Component} from 'react';
+import './Todo.css';
 
 export default class TodoApp extends Component{
     constructor(props){
@@ -44,17 +45,30 @@ export default class TodoApp extends Component{
         // console.log(e.target.value);
         this.setState({input: e.target.value});
     };
+
+    getUndone = () => {
+        let undone = this.state.items.filter(item => {
+            return !item.done;
+        });
+        if(!undone.length)
+            return;
+        
+        return undone.length;
+    };
     render(){
         return(
         <div className="container">
             <br/>
             <div className="row">
                 <div className="col-md-6">
+                    <div className="todolist">
                     List Undone
                     <form onSubmit={(e) => {
                         e.preventDefault();
                         this.add()}} >
-                        <input placeholder="add todo" value={this.state.input} onChange={(e) => this.handleChange(e)}/>
+                        <input placeholder="add todo" 
+                        className="form-control form-control-lg"
+                        value={this.state.input} onChange={(e) => this.handleChange(e)}/>
                     </form>
                     <ul>
                         {this.state.items.map(item => {
@@ -63,8 +77,13 @@ export default class TodoApp extends Component{
                             }
                         })}
                     </ul>
+                    <div className="todo-footer">
+                        <span>{this.getUndone()}</span> Items Left
+                    </div>
+                    </div>
                 </div>
                 <div className="col-md-6">
+                <div className="todolist">
                     List Done
                     <ul>
                         {this.state.items.map(item => {
@@ -73,7 +92,7 @@ export default class TodoApp extends Component{
                             }
                         })}
                     </ul>
-                        
+                    </div>
                 </div>
             </div>
         </div>);
