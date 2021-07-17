@@ -28,6 +28,16 @@ export default class TodoApp extends Component{
 
     add = () => {
         console.log(this.state.input);
+        let newItem = {text:this.state.input,done:false,key:new Date().getMilliseconds() + " " + this.state.input};
+         this.setState((state) => ({
+            //  items : state.items.concat(newItem)
+             //et si on veut inverser la syntaxe est la suivante
+             items: [newItem].concat(this.state.items)
+         }));
+
+        // console.log("ligne 36 "+ this.state.items)
+        // this.state.items.unshift(newItem);
+        // console.log("ligne 38 "+ this.state.items)
     };
 
     handleChange = (e) => {
