@@ -31,10 +31,10 @@ app.use('/todos', router);
 
 router.route('/add').post((req,res) => {
 
-    let todo = new Todo({text:"text", isCompleted:false});
+    let todo = new Todo({text:"text2", isCompleted:false});
     console.log(res);
     todo.save()
-    .then(() => console.log(todo.text))
+    .then(() => console.log("todo successfully created"))
     .catch(err => console.error(err));
     
     
