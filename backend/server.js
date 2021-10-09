@@ -34,7 +34,7 @@ app.use("/todos", router);
 //to add to DB
 router.route('/add').post((req,res) => {
 
-    let todo = new Todo({text:"text", isCompleted:true});
+    let todo = new Todo({text:"text2", isCompleted:false});
     console.log(res);
     todo.save()
     .then(() => {
@@ -71,13 +71,27 @@ router.route('/').get((req, res) => {
 // update todo
 router.route('/:id').put((req, res) => {
     Todo.findById(req.params.id, (err, todo) => {
-        if(err) {res.send(err);}
+        console.log("ligne 74 ==> L'ID de la DB Numéro: " + req.params.id +" Est trouvé");
+        if(err) {
+            res.send(err);
+        }else{
         todo.text = req.body.text; 
         todo.isCompleted = req.body.isCompleted;
-        todo.save(err => {
-            if(err) {res.send(err);}
-            res.json('todo successfully updated');
-        });
+        // todo.save(err => {
+            //     if(err) {res.send(err);}
+            //     res.json('todo successfully updated');
+            // });
+           
+            todo.save()
+            .then(() => {
+                console.log("todo successfully updated"+ todo);
+                res.status(200).json("todo successfully updated " + todo);
+            })
+            .catch(err => {
+                console.error(err);
+                res.status(400).json(err);
+            });
+        }
     });
 });
 
@@ -108,6 +122,7 @@ router.route("/:id").delete(function (req, res) {
     //     console.log("todo updated successfully");
     //     res.json({ message: "todo deleted successfully" });
     //   });
+    console.log("todo deleted successfully");
     res.json({ message: "todo deleted successfully" });
     });
   });
